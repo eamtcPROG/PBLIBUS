@@ -1,0 +1,25 @@
+{
+  "name": "ibusnodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eamtcPROG/PBLIBUS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eamtcPROG/PBLIBUS/issues"
+  },
+  "homepage": "https://github.com/eamtcPROG/PBLIBUS#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "dotenv": "^8.2.0"
+  }
+}
