@@ -39,6 +39,7 @@ require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
 require('./app/routes/country.routes')(app);
 require('./app/routes/typeUser.routes')(app);
+require('./app/routes/address.routes')(app);
 
 // set port, listen for requests
 const PORT = 8080;
