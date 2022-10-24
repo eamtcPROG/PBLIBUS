@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
     const transporter = sequelize.define("Transporter", {
-      IdCoustomer: {
+      IdTransporter: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,

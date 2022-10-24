@@ -22,7 +22,7 @@ const TypeUser = db.typeUser;
 console.log("I was here");
 // db.sequelize.sync();
 // force: true will drop the table if it already exists
-db.sequelize.sync({alert:true}).then(() => {
+db.sequelize.sync({alter:true}).then(() => {
   console.log('Sync Database');
 })
 .catch((err) => {
@@ -43,6 +43,10 @@ require('./app/routes/address.routes')(app);
 require('./app/routes/order.routes')(app);
 require('./app/routes/customer.routes')(app);
 require('./app/routes/brand.routes')(app);
+require('./app/routes/offer.routes')(app);
+require('./app/routes/transporter.routes')(app);
+require('./app/routes/transport.routes')(app);
+require('./app/routes/model.routes')(app);
 // set port, listen for requests
 const PORT = 8080;
 app.listen(PORT, () => {

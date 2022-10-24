@@ -6,7 +6,7 @@ module.exports = (sequelize, Sequelize) => {
         autoIncrement: true,
       },
       Price: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DOUBLE
       },
       OrderId: {
         type: Sequelize.INTEGER
