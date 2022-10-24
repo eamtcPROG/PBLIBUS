@@ -18,4 +18,10 @@ module.exports = function(app) {
     app.get("/api/country/:id",     
     controller.FindCountryById
     );
+    app.delete("/api/country/delete/:id",     
+    controller.DeleteCountryById
+    );
+    app.put("/api/country/update/:id",     
+    controller.UpdateCountryById
+    );
   };

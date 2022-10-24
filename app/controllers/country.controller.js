@@ -61,4 +61,47 @@ exports.CreateCountry = (req, res) => {
         res.status(500).send({ message: err.message });
       });
 };
+exports.DeleteCountryById = (req, res) => {
+    
+  Country.destroy({
+    where: {
+      IdCountry: req.params.id
+    }
+  })
+    .then(obj => {
+      if (!obj) {
+        return res.status(404).send({ message: "Country Not found." });
+      }else{
+        return res.status(200).send({ message: "Country Deleted." });
+      }
+      
+      
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
 
+exports.UpdateCountryById = (req, res) => {
+    
+  Country.update({
+    Name: req.body.name,
+  },
+  {
+    where: {
+      IdCountry: req.params.id
+    }
+  })
+    .then(obj => {
+      if (!obj) {
+        return res.status(404).send({ message: "Country Not found." });
+      }else{
+        return res.status(200).send({ message: "Country Updated." });
+      }
+      
+      
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
