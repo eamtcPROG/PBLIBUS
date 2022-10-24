@@ -12,6 +12,10 @@ module.exports = function(app) {
     app.post("/api/country/add",     
       controller.CreateCountry
     );
-  
-    
+    app.get("/api/country/getall",     
+    controller.FindAllCountry
+    );
+    app.get("/api/country/:id",     
+    controller.FindCountryById
+    );
   };
