@@ -74,4 +74,10 @@ exports.signin = (req, res) => {
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
+
+
+    
 };
+exports.checkout = (req, res) => {
+  res.status(200).json({ message: 'ok' });
+}
