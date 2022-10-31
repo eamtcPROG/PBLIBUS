@@ -6,7 +6,7 @@ exports.CreateOffer = (req, res) => {
     Offer.create({ 
         Price: req.body.price,
         OrderId: req.body.orderid,
-        TransporterId: req.body.trasporterid,
+        TrasporterId: req.body.trasporterid,
        
     })
       .then(obj => {
@@ -49,13 +49,11 @@ exports.CreateOffer = (req, res) => {
         if (!obj) {
           return res.status(404).send({ message: "Offer Not found." });
         }
-        
-        
           return res.status(200).send({
             IdOffer: obj.IdOffer,
-            Price: req.body.Price,
-            OrderId: req.body.OrderId,
-            TransporterId: req.body.TransporterId,
+            Price: obj.Price,
+            OrderId: obj.OrderId,
+            TrasporterId: obj.TrasporterId,
            
           });
         
@@ -90,7 +88,7 @@ exports.UpdateOfferById = (req, res) => {
   Offer.update({
     Price: req.body.price,
     OrderId: req.body.orderid,
-    TransporterId: req.body.trasporterid,
+    TrasporterId: req.body.trasporterid,
   },
   {
     where: {
