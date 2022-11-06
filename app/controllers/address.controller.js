@@ -11,10 +11,11 @@ exports.CreateAddress = (req, res) => {
     })
       .then(obj => {
         if (obj) {
-          res.send({ message: "Added to Address successfully!" });
+          return res.status(200).send({ IdAddress: obj.IdAddress})
         }
         
-      }) 
+      }
+      )
       .catch(err => {
         res.status(500).send({ message: err.message });
       });

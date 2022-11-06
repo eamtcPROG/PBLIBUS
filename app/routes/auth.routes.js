@@ -24,4 +24,5 @@ module.exports = function(app) {
   
 
   app.get('/api/auth/check-auth',[authJwt.verifyToken], controller.checkout);
+  app.get('/api/auth/getuser',[authJwt.verifyToken], controller.getUser);
 };

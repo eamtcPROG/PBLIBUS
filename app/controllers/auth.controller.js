@@ -11,21 +11,21 @@ var bcrypt = require("bcryptjs");
 exports.signup = (req, res) => {
   // Save User to Database
   User.create({
-    
+
     Name: req.body.name,
     Surname: req.body.surname,
     Email: req.body.email,
     Password: bcrypt.hashSync(req.body.password, 8),
     Birthdate: req.body.birthdate,
     TypeUserId: req.body.typeUserId,
-    
+
   })
     .then(user => {
       if (user) {
         res.send({ message: "User registered successfully!" });
       }
-      
-    }) 
+
+    })
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
@@ -54,12 +54,12 @@ exports.signin = (req, res) => {
         });
       }
 
-      var token = jwt.sign({ id: user.id }, config.secret, {
+      var token = jwt.sign({ id: user.IdUser }, config.secret, {
         expiresIn: 86400 // 24 hours
       });
 
-      
-      if(token){
+
+      if (token) {
         return res.status(200).send({
           IdUser: user.IdUser,
           Name: user.Name,
@@ -76,8 +76,35 @@ exports.signin = (req, res) => {
     });
 
 
-    
+
 };
+exports.getUser = (req, res) => {
+  User.findOne({
+    where: {
+      IdUser:req.decoded
+    }
+  })
+    .then(user => {
+      if (!user) {
+        return res.status(404).send({ message: "User Not found." });
+      } 
+      
+
+        return res.status(200).send({
+          IdUser: user.IdUser,
+          Name: user.Name,
+          Surname: user.Surname,
+          Email: user.Email,
+          Birthdate: user.Birthdate,
+          TypeUserId: user.TypeUserId
+        });
+      
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+      
+    });
+}
 exports.checkout = (req, res) => {
   res.status(200).json({ message: 'ok' });
 }
