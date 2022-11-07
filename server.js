@@ -29,6 +29,68 @@ db.sequelize.sync({force:true}).then(() => {
   console.log("Failed to sync db: " + err.message);
 });
 
+const country = db.country;
+country.sync({ force: true }).then(() => {
+  country.create({ Name: "Moldova" });
+  country.create({ Name: "Romania" });
+  country.create({ Name: "Polonia" });
+  country.create({ Name: "Italia" });
+
+  console.log('Sync country');
+})
+  .catch((err) => {
+    console.log("Failed to sync country: " + err.message);
+    
+  });
+ 
+
+const typeUser = db.typeUser;
+typeUser.sync({ force: true }).then(() => {
+  typeUser.create({ Name: "Customer" });
+  typeUser.create({ Name: "Transporter" });
+
+  console.log('Sync country');
+})
+  .catch((err) => {
+    console.log("Failed to sync country: " + err.message);
+    
+  });
+
+
+const brand = db.brand;
+brand.sync({ force: true }).then(() => {
+  brand.create({ Name: "Mercedes" });
+  brand.create({ Name: "VolksWagen" });
+  brand.create({ Name: "Ford" });
+  brand.create({ Name: "Iveco" });
+  brand.create({ Name: "Hyundai" });
+  brand.create({ Name: "Renault" });
+  brand.create({ Name: "Neoplan" });
+  brand.create({ Name: "Man" });
+  brand.create({ Name: "Scania" });
+  
+  
+    console.log('Sync country');
+  })
+    .catch((err) => {
+      console.log("Failed to sync country: " + err.message);
+      
+    });
+
+const model = db.model;
+model.sync({ force: true }).then(() => {
+    model.create({Name: "Tourismo", BrandId: "1" });
+    model.create({ Name: "Vito", BrandId: "1" });
+    model.create({ Name: "Multivan", BrandId: "2" });
+      
+      
+      console.log('Sync country');
+    })
+      .catch((err) => {
+        console.log("Failed to sync country: " + err.message);
+          
+      });
+
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to ibus application." });

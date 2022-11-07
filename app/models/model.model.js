@@ -11,7 +11,7 @@ module.exports = (sequelize, Sequelize) => {
       BrandId: {
         type: Sequelize.INTEGER
       }
-    });
+    }, {timestamps: false});
   
     return model;
   };

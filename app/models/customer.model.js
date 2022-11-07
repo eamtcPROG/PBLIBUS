@@ -11,7 +11,7 @@ module.exports = (sequelize, Sequelize) => {
       UserId: {
         type: Sequelize.INTEGER
       }
-    });
+    }, {timestamps: false});
   
     return customer;
   };

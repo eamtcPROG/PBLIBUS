@@ -23,7 +23,7 @@ module.exports = (sequelize, Sequelize) => {
     TypeUserId: {
       type: Sequelize.INTEGER
     }
-  });
+  }, {timestamps: false});
 
   return User;
 };

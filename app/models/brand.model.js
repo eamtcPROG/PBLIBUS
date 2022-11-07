@@ -8,7 +8,7 @@ module.exports = (sequelize, Sequelize) => {
       Name: {
         type: Sequelize.STRING
       }
-    });
+    }, {timestamps: false});
   
     return brand;
   };

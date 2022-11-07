@@ -17,7 +17,7 @@ module.exports = (sequelize, Sequelize) => {
       ModelId: {
         type: Sequelize.INTEGER
       }
-    });
+    }, {timestamps: false});
   
     return transport;
   };

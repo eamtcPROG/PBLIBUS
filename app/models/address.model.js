@@ -17,7 +17,7 @@ module.exports = (sequelize, Sequelize) => {
       CountryId: {
         type: Sequelize.INTEGER
       }
-    });
+    }, {timestamps: false});
   
     return address;
   };
