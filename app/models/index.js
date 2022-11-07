@@ -38,8 +38,19 @@ db.transporter = require("../models/transporter.model.js")(sequelize, Sequelize)
 db.offer = require("../models/offer.model.js")(sequelize, Sequelize);
 
 
-// db.typeUser.hasMany(db.user, { foreignKey: 'TypeUserId' });
-// db.user.belongsTo(db.typeUser);
-
+db.typeUser.hasMany(db.user, { foreignKey: 'TypeUserId' });
+db.brand.hasMany(db.model, { foreignKey: 'BrandId' });
+db.model.hasMany(db.transport, { foreignKey: 'ModelId' });
+db.typeTrasport.hasMany(db.transport, { foreignKey: 'TypeTransportId' });
+db.transport.hasMany(db.transporter, { foreignKey: 'TransportId' });
+db.user.hasMany(db.transporter, { foreignKey: 'UserId' });
+db.country.hasMany(db.address, { foreignKey: 'CountryId' });
+db.address.hasMany(db.order, { foreignKey: 'StartPointAddressId' });
+db.address.hasMany(db.order, { foreignKey: 'EndPointAddressId' });
+db.address.hasMany(db.order, { foreignKey: 'EndPointAddressId' });
+db.order.hasMany(db.customer, { foreignKey: 'OrderId' });
+db.user.hasMany(db.customer, { foreignKey: 'UserId' });
+db.order.hasMany(db.offer, { foreignKey: 'OrderId' });
+db.transporter.hasMany(db.offer, { foreignKey: 'TrasporterId' });
 
 module.exports = db;

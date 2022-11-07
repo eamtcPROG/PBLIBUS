@@ -22,7 +22,7 @@ const TypeUser = db.typeUser;
 console.log("I was here");
 // db.sequelize.sync();
 // force: true will drop the table if it already exists
-db.sequelize.sync({alter:true}).then(() => {
+db.sequelize.sync({force:true}).then(() => {
   console.log('Sync Database');
 })
 .catch((err) => {
