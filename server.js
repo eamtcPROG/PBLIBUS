@@ -22,12 +22,7 @@ const TypeUser = db.typeUser;
 console.log("I was here");
 // db.sequelize.sync();
 // force: true will drop the table if it already exists
-db.sequelize.sync({force:true}).then(() => {
-  console.log('Sync Database');
-})
-.catch((err) => {
-  console.log("Failed to sync db: " + err.message);
-});
+
 
 const country = db.country;
 country.sync({ force: true }).then(() => {
@@ -90,7 +85,12 @@ model.sync({ force: true }).then(() => {
         console.log("Failed to sync country: " + err.message);
           
       });
-
+      db.sequelize.sync({alter:true}).then(() => {
+        console.log('Sync Database');
+      })
+      .catch((err) => {
+        console.log("Failed to sync db: " + err.message);
+      });
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to ibus application." });
