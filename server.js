@@ -22,7 +22,19 @@ const TypeUser = db.typeUser;
 console.log("I was here");
 // db.sequelize.sync();
 // force: true will drop the table if it already exists
+const typeTransport = db.typeTrasport;
+typeTransport.sync({ force: true }).then(() => {
+  typeTransport.create({ Name: "Sedan" });
+  typeTransport.create({ Name: "Bus" });
+  typeTransport.create({ Name: "Minibus" });
+  typeTransport.create({ Name: "Van" });
 
+  console.log('Sync typeTransport');
+})
+  .catch((err) => {
+    console.log("Failed to sync typeTransport: " + err.message);
+    
+  });
 
 const country = db.country;
 country.sync({ force: true }).then(() => {
@@ -44,10 +56,10 @@ typeUser.sync({ force: true }).then(() => {
   typeUser.create({ Name: "Customer" });
   typeUser.create({ Name: "Transporter" });
 
-  console.log('Sync country');
+  console.log('Sync user');
 })
   .catch((err) => {
-    console.log("Failed to sync country: " + err.message);
+    console.log("Failed to sync user: " + err.message);
     
   });
 
@@ -73,10 +85,10 @@ brand.sync({ force: true }).then(() => {
     });
 
 const model = db.model;
-model.sync({ force: true }).then(() => {
-    model.create({Name: "Tourismo", BrandId: "1" });
-    model.create({ Name: "Vito", BrandId: "1" });
-    model.create({ Name: "Multivan", BrandId: "2" });
+model.sync().then(() => {
+    model.create({Name: "Tourismo", BrandId: 1 });
+    model.create({ Name: "Vito", BrandId: 1 });
+    model.create({ Name: "Multivan", BrandId: 2 });
       
       
       console.log('Sync country');
@@ -109,6 +121,7 @@ require('./app/routes/offer.routes')(app);
 require('./app/routes/transporter.routes')(app);
 require('./app/routes/transport.routes')(app);
 require('./app/routes/model.routes')(app);
+require('./app/routes/typeTrasport.routes')(app);
 // set port, listen for requests
 const PORT = 8080;
 app.listen(PORT, () => {

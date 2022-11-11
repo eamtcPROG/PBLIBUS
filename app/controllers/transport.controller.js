@@ -11,7 +11,10 @@ exports.CreateTransport = (req, res) => {
     })
       .then(obj => {
         if (obj) {
-          res.send({ message: "Added to Transport successfully!" });
+          return res.status(200).send({
+            IdTransport: obj.IdTransport,
+            
+          });
         }
         
       }) 

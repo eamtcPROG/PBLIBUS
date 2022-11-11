@@ -23,4 +23,9 @@ module.exports = function(app) {
     [authJwt.verifyToken, authJwt.isTrasporter],
     controller.trasporterBoard
   );
+  app.get(
+    "/api/test/admin",
+    [authJwt.verifyToken],
+    controller.trasporterBoard
+  );
 };
