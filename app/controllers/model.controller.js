@@ -36,7 +36,21 @@ exports.FindAllModels = (req, res) => {
     res.status(500).send({message: err.message});
   });
 };
+exports.FindAllModelsAndBrand = (req, res) => {
 
+  db.brand.findAll({ include: model })
+  .then(obj => {
+    console.log(obj);
+
+
+    if(obj) {
+      res.json(obj);
+    }
+  })
+  .catch(err => {
+    res.status(500).send({message: err.message});
+  });
+};
 exports.FindModelById = (req, res)=> {
 
   model.findOne({

@@ -15,6 +15,9 @@ module.exports = function(app) {
     app.get("/api/model/getall",     
     controller.FindAllModels
     );
+    app.get("/api/model/getallwithbrand",     
+    controller.FindAllModelsAndBrand
+    );
     app.get("/api/model/:id",     
     controller.FindModelById
     );

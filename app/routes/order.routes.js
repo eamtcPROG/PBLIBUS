@@ -15,6 +15,9 @@ module.exports = function(app) {
     app.get("/api/order/getall",     
     controller.FindAllOrder
     );
+    app.get("/api/order/getallwithaddress",     
+    controller.FindAllOrderAndAddress
+    );
     app.get("/api/order/:id",     
     controller.FindOrderById
     );

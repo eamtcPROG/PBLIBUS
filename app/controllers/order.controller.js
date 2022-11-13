@@ -38,7 +38,21 @@ exports.CreateOrder = (req, res) => {
           res.status(500).send({ message: err.message });
         });
   };
+  exports.FindAllOrderAndAddress = (req, res) => {
 
+    db.address.findAll({ include: Order })
+    .then(obj => {
+      console.log(obj);
+  
+  
+      if(obj) {
+        res.json(obj);
+      }
+    })
+    .catch(err => {
+      res.status(500).send({message: err.message});
+    });
+  };
   exports.FindOrderById = (req, res) => {
     
     Order.findOne({
