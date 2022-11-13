@@ -18,6 +18,9 @@ module.exports = function(app) {
     app.get("/api/transporter/:id",     
     controller.FindTransporterById
     );
+    app.get("/api/transporter/getalltransport/:id",     
+    controller.FindAllTransporterWithFK
+    );
     app.delete("/api/transporter/delete/:id",     
     controller.DeleteTransporterById
     );

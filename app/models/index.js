@@ -39,18 +39,30 @@ db.offer = require("../models/offer.model.js")(sequelize, Sequelize);
 
 
 db.typeUser.hasMany(db.user, { foreignKey: 'TypeUserId' });
+db.user.belongsTo(db.typeUser, { foreignKey: 'TypeUserId' });
 db.brand.hasMany(db.model, { foreignKey: 'BrandId' });
+db.model.belongsTo(db.brand, { foreignKey: 'BrandId' });
 db.model.hasMany(db.transport, { foreignKey: 'ModelId' });
+db.transport.belongsTo(db.model, { foreignKey: 'ModelId' });
 db.typeTrasport.hasMany(db.transport, { foreignKey: 'TypeTransportId' });
+db.transport.belongsTo(db.typeTrasport, { foreignKey: 'TypeTransportId' });
 db.transport.hasMany(db.transporter, { foreignKey: 'TransportId' });
+db.transporter.belongsTo(db.transport, { foreignKey: 'TransportId' });
 db.user.hasMany(db.transporter, { foreignKey: 'UserId' });
+db.transporter.belongsTo(db.user, { foreignKey: 'UserId' });
 db.country.hasMany(db.address, { foreignKey: 'CountryId' });
+db.address.belongsTo(db.country, { foreignKey: 'CountryId' });
 db.address.hasMany(db.order, { foreignKey: 'StartPointAddressId' });
+db.order.belongsTo(db.address, { foreignKey: 'StartPointAddressId' });
 db.address.hasMany(db.order, { foreignKey: 'EndPointAddressId' });
-db.address.hasMany(db.order, { foreignKey: 'EndPointAddressId' });
+db.order.belongsTo(db.address, { foreignKey: 'EndPointAddressId' });
 db.order.hasMany(db.customer, { foreignKey: 'OrderId' });
+db.customer.belongsTo(db.order, { foreignKey: 'OrderId' });
 db.user.hasMany(db.customer, { foreignKey: 'UserId' });
+db.customer.belongsTo(db.user, { foreignKey: 'UserId' });
 db.order.hasMany(db.offer, { foreignKey: 'OrderId' });
+db.offer.belongsTo(db.order, { foreignKey: 'OrderId' });
 db.transporter.hasMany(db.offer, { foreignKey: 'TrasporterId' });
+db.offer.belongsTo(db.transporter, { foreignKey: 'TrasporterId' });
 
 module.exports = db;
