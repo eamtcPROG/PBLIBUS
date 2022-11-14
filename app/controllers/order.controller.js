@@ -12,7 +12,10 @@ exports.CreateOrder = (req, res) => {
     })
       .then(obj => {
         if (obj) {
-          res.send({ message: "Added to Order successfully!" });
+          return res.status(200).send({
+            IdOrder: obj.IdOrder,
+ 
+          });
         }
         
       }) 

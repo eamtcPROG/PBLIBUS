@@ -9,7 +9,11 @@ exports.CreateCustomer = (req, res) => {
     })
       .then(obj => {
         if (obj) {
-          res.send({ message: "Added to Customer successfully!" });
+          return res.status(200).send({
+            IdCustomer: obj.IdCustomer,
+            OrderId: obj.OrderId,
+            UserId: obj.UserId
+          });
         }
         
       }) 

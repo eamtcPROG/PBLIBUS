@@ -76,9 +76,9 @@ if (restart) {
     brand.create({ Name: "Scania" });
 
 
-    console.log('Sync country');
+    console.log('Sync brand');
   }).catch((err) => {
-    console.log("Failed to sync country: " + err.message);
+    console.log("Failed to sync brand: " + err.message);
 
   });
 
@@ -90,9 +90,9 @@ if (restart) {
     model.create({ Name: "Multivan", BrandId: 2 });
 
 
-    console.log('Sync country');
+    console.log('Sync model');
   }).catch((err) => {
-    console.log("Failed to sync country: " + err.message);
+    console.log("Failed to sync model: " + err.message);
 
   });
   const customer = db.customer;
