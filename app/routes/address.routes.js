@@ -24,4 +24,7 @@ module.exports = function(app) {
     app.put("/api/address/update/:id",     
     controller.UpdateAddressById
     );
+    app.get("/api/address/get/getfk",     
+    controller.FindAllAdressWithFK
+    );
   };

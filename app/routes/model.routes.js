@@ -27,4 +27,7 @@ module.exports = function(app) {
     app.put("/api/model/update/:id",     
     controller.UpdateModelById
     );
+    app.get("/api/model/get/getfk",     
+    controller.FindAllModelsWithFK
+    );
   };

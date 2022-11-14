@@ -118,4 +118,25 @@ exports.DeleteModelById = (req, res) => {
       .catch(err => {
         res.status(500).send({ message: err.message });
       });
-  };
+    };
+
+  exports.FindAllModelsWithFK = (req, res) => {
+ 
+        db.model.findAll({
+          include: { all: true }
+          })
+            .then(obj => {
+              console.log(obj);
+        
+              if (obj) {
+         
+                res.json(obj);
+              }
+        
+            })
+            .catch(err => {
+              res.status(500).send({ message: err.message });
+            });
+        
+        };
+

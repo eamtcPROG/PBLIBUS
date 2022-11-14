@@ -24,4 +24,7 @@ module.exports = function(app) {
     app.put("/api/customer/update/:id",     
     controller.UpdateCustomerById
     );
+    app.get("/api/customer/get/getfk",     
+    controller.FindAllCustomerWithFK
+    );
   };

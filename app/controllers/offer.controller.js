@@ -107,4 +107,24 @@ exports.UpdateOfferById = (req, res) => {
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
-};
+  };
+
+exports.FindAllOfferWithFK = (req, res) => {
+ 
+      Offer.findAll({
+        include: { all: true }
+        })
+          .then(obj => {
+            console.log(obj);
+      
+            if (obj) {
+       
+              res.json(obj);
+            }
+      
+          })
+          .catch(err => {
+            res.status(500).send({ message: err.message });
+          });
+      
+      };

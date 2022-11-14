@@ -15,7 +15,6 @@ module.exports = function(app) {
     app.get("/api/offer/getall",     
     controller.FindAllOffer
     );
-    
     app.get("/api/offer/:id",     
     controller.FindOfferById
     );
@@ -24,5 +23,8 @@ module.exports = function(app) {
     );
     app.put("/api/offer/update/:id",     
     controller.UpdateOfferById
+    );
+    app.get("/api/offer/get/getfk",     
+    controller.FindAllOfferWithFK
     );
   };

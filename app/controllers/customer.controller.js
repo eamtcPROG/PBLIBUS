@@ -19,7 +19,7 @@ exports.CreateCustomer = (req, res) => {
       
   };
 
-
+  
   exports.FindAllCustomer = (req, res) => {
     
       Customer.findAll()
@@ -105,3 +105,22 @@ exports.UpdateCustomerById = (req, res) => {
       res.status(500).send({ message: err.message });
     });
 };
+
+exports.FindAllCustomerWithFK= (req, res) => {
+ 
+  Customer.findAll({
+    include: { all: true },
+  })
+    .then(obj => {
+      console.log(obj);
+
+      if (obj) {
+ 
+        res.json(obj);
+      }
+
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+  };

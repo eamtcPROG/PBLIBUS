@@ -24,4 +24,7 @@ module.exports = function(app) {
     app.put("/api/transport/update/:id",     
     controller.UpdateTransportById
     );
+    app.get("/api/transport/get/getfk",     
+    controller.FindAllTransportWithFK
+    );
   };
