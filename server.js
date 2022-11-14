@@ -63,7 +63,6 @@ if (restart) {
 
   });
 
-
   const brand = db.brand;
   brand.sync({ force: true }).then(() => {
     brand.create({ Name: "Mercedes" });
