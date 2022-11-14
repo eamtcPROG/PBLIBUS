@@ -40,7 +40,17 @@ exports.CreateOrder = (req, res) => {
   };
   exports.FindAllOrderAndAddress = (req, res) => {
 
-    db.address.findAll({ include: Order })
+    Order.findAll({ include: [{
+      model: db.address,
+      as: 'AddressStart',
+      include:{model: db.country}
+    },
+    {
+      model: db.address,
+      as: 'AddressEnd',
+      include:{model: db.country}
+    }
+  ] })
     .then(obj => {
       console.log(obj);
   
