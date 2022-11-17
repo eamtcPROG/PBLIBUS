@@ -30,4 +30,7 @@ module.exports = function(app) {
     app.get("/api/offer/get/getfk",     
     controller.FindAllOfferWithFK
     );
+    app.get("/api/offer/getfororder/:id",     
+    controller.FindOffersForOrder
+    );
   };

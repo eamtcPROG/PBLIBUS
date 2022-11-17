@@ -76,6 +76,48 @@ exports.FindTransporterWithOrders = (req, res) => {
     });
 };
 
+
+exports.FindOffersForOrder = (req, res) => {
+
+  Offer.findAll({
+    include:{
+      model:db.transporter,
+      include:[{
+        model: db.transport,
+        include:[{
+          model:db.model,
+          include:{
+            model:db.brand
+          }
+        },
+        {
+          model:db.typeTrasport
+        },
+      ]
+      },
+      {
+        model:db.user
+      }
+    ]
+    }
+  ,
+  where: {
+    OrderId: req.params.id
+  }
+  })
+    .then(obj => {
+      console.log(obj);
+
+      if (obj) {
+        res.json(obj);
+      }
+
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
 exports.FindAllOffer = (req, res) => {
 
   Offer.findAll()
