@@ -59,6 +59,38 @@ exports.FindAllTransporterWithFK = (req, res) => {
     });
 
 };
+exports.FindAllTransporterWithTransport = (req, res) => {
+ 
+  Transporter.findAll({
+    include: { 
+      model:db.transport,
+      include:[{
+        model:db.model,
+        include:{
+          model:db.brand
+        }
+      },
+    {model:db.typeTrasport}
+    ]
+     },
+    where: {
+      UserId: req.params.id
+    }
+  })
+    .then(obj => {
+      console.log(obj);
+
+      if (obj) {
+ 
+        res.json(obj);
+      }
+
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+
+};
 exports.FindTransporterById = (req, res) => {
 
   Transporter.findOne({

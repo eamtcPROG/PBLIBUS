@@ -21,6 +21,9 @@ module.exports = function(app) {
     app.get("/api/transporter/getalltransport/:id",     
     controller.FindAllTransporterWithFK
     );
+    app.get("/api/transporter/gettransport/:id",     
+    controller.FindAllTransporterWithTransport
+    );
     app.delete("/api/transporter/delete/:id",     
     controller.DeleteTransporterById
     );
