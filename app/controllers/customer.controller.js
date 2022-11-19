@@ -1,71 +1,72 @@
+const { where } = require("sequelize");
 const db = require("../models");
 
 const Customer = db.customer;
 exports.CreateCustomer = (req, res) => {
-    
-    Customer.create({
-      OrderId: req.body.orderid,
-      UserId: req.body.userid,
-    })
-      .then(obj => {
-        if (obj) {
-          return res.status(200).send({
-            IdCustomer: obj.IdCustomer,
-            OrderId: obj.OrderId,
-            UserId: obj.UserId
-          });
-        }
-        
-      }) 
-      .catch(err => {
-        res.status(500).send({ message: err.message });
-      });
-      
-  };
 
-  
-  exports.FindAllCustomer = (req, res) => {
-    
-      Customer.findAll()
-        .then(obj => {
-          console.log(obj);
-        
-          if (obj) {
-            res.json(obj);
-          }
-          
-        }) 
-        .catch(err => {
-          res.status(500).send({ message: err.message });
+  Customer.create({
+    OrderId: req.body.orderid,
+    UserId: req.body.userid,
+  })
+    .then(obj => {
+      if (obj) {
+        return res.status(200).send({
+          IdCustomer: obj.IdCustomer,
+          OrderId: obj.OrderId,
+          UserId: obj.UserId
         });
-  };
-
-  exports.FindCustomerById = (req, res) => {
-    
-    Customer.findOne({
-      where: {
-        IdCustomer: req.params.id
       }
+
     })
-      .then(obj => {
-        if (!obj) {
-          return res.status(404).send({ message: "Customer Not found." });
-        }
-        
-        
-          return res.status(200).send({
-            IdCustomer: obj.IdCustomer,
-            OrderId: obj.OrderId,
-            UserId: obj.UserId
-          });
-        
-      })
-      .catch(err => {
-        res.status(500).send({ message: err.message });
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+
+};
+
+
+exports.FindAllCustomer = (req, res) => {
+
+  Customer.findAll()
+    .then(obj => {
+      console.log(obj);
+
+      if (obj) {
+        res.json(obj);
+      }
+
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
+exports.FindCustomerById = (req, res) => {
+
+  Customer.findOne({
+    where: {
+      IdCustomer: req.params.id
+    }
+  })
+    .then(obj => {
+      if (!obj) {
+        return res.status(404).send({ message: "Customer Not found." });
+      }
+
+
+      return res.status(200).send({
+        IdCustomer: obj.IdCustomer,
+        OrderId: obj.OrderId,
+        UserId: obj.UserId
       });
+
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
 };
 exports.DeleteCustomerById = (req, res) => {
-    
+
   Customer.destroy({
     where: {
       IdCustomer: req.params.id
@@ -74,11 +75,11 @@ exports.DeleteCustomerById = (req, res) => {
     .then(obj => {
       if (!obj) {
         return res.status(404).send({ message: "Customer Not found." });
-      }else{
+      } else {
         return res.status(200).send({ message: "Customer Deleted." });
       }
-      
-      
+
+
     })
     .catch(err => {
       res.status(500).send({ message: err.message });
@@ -86,32 +87,32 @@ exports.DeleteCustomerById = (req, res) => {
 };
 
 exports.UpdateCustomerById = (req, res) => {
-    
+
   Customer.update({
     OrderId: req.body.orderid,
     UserId: req.body.userid,
   },
-  {
-    where: {
-      IdCustomer: req.params.id
-    }
-  })
+    {
+      where: {
+        IdCustomer: req.params.id
+      }
+    })
     .then(obj => {
       if (!obj) {
         return res.status(404).send({ message: "Customer Not found." });
-      }else{
+      } else {
         return res.status(200).send({ message: "Customer Updated." });
       }
-      
-      
+
+
     })
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
 };
 
-exports.FindAllCustomerWithFK= (req, res) => {
- 
+exports.FindAllCustomerWithFK = (req, res) => {
+
   Customer.findAll({
     include: { all: true },
   })
@@ -119,7 +120,7 @@ exports.FindAllCustomerWithFK= (req, res) => {
       console.log(obj);
 
       if (obj) {
- 
+
         res.json(obj);
       }
 
@@ -127,4 +128,39 @@ exports.FindAllCustomerWithFK= (req, res) => {
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
-  };
+};
+
+exports.FindAllOrderForCustomer = (req, res) => {
+
+  Customer.findAll({
+    include: {
+      model: db.order,
+      include: [{
+        model: db.address,
+        as: 'AddressStart',
+        include: { model: db.country }
+      },
+      {
+        model: db.address,
+        as: 'AddressEnd',
+        include: { model: db.country }
+      }
+      ]
+    },
+    where: {
+      UserId: req.params.id
+    }
+    
+  })
+    .then(obj => {
+      console.log(obj);
+
+
+      if (obj) {
+        res.json(obj);
+      }
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};

@@ -27,4 +27,7 @@ module.exports = function(app) {
     app.get("/api/customer/get/getfk",     
     controller.FindAllCustomerWithFK
     );
+    app.get("/api/customer/getorders/:id",     
+    controller.FindAllOrderForCustomer
+    );
   };
