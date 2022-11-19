@@ -40,29 +40,34 @@ exports.FindTransporterWithOrders = (req, res) => {
       ]
     },
     {
-      model:db.transporter,
-      include:[{
+      model: db.transporter,
+      include: [{
         model: db.transport,
-        include:[{
-          model:db.model,
-          include:{
-            model:db.brand
+        include: [{
+          model: db.model,
+          include: {
+            model: db.brand
           }
         },
         {
-          model:db.typeTrasport
+          model: db.typeTrasport
         },
-      ]
+        ]
       },
       {
-        model:db.user
+        model: db.user
       }
-    ]
+
+      ]
+
+    },
+    {
+      model: db.status
     }
-  ],
-  where: {
-    '$Transporter.User.IdUser$': req.params.id
-  }
+    ],
+    where: {
+      '$Transporter.User.IdUser$': req.params.id
+    }
   })
     .then(obj => {
       console.log(obj);
@@ -81,30 +86,34 @@ exports.FindTransporterWithOrders = (req, res) => {
 exports.FindOffersForOrder = (req, res) => {
 
   Offer.findAll({
-    include:{
-      model:db.transporter,
-      include:[{
+    include: [{
+      model: db.transporter,
+      include: [{
         model: db.transport,
-        include:[{
-          model:db.model,
-          include:{
-            model:db.brand
+        include: [{
+          model: db.model,
+          include: {
+            model: db.brand
           }
         },
         {
-          model:db.typeTrasport
+          model: db.typeTrasport
         },
-      ]
+        ]
       },
       {
-        model:db.user
+        model: db.user
       }
-    ]
+      ]
+      
+    },
+    {
+      model: db.status
+    }]
+    ,
+    where: {
+      OrderId: req.params.id
     }
-  ,
-  where: {
-    OrderId: req.params.id
-  }
   })
     .then(obj => {
       console.log(obj);
