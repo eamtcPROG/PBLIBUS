@@ -52,8 +52,15 @@ exports.CreateOrder = (req, res) => {
       model: db.address,
       as: 'AddressEnd',
       include:{model: db.country}
+    },
+    {
+      model:db.offer
     }
-  ] })
+  ],
+where:{
+  '$Offers$': null
+}
+})
     .then(obj => {
       console.log(obj);
   

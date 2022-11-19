@@ -22,8 +22,23 @@ const db = require("./app/models");
 console.log("I was here");
 // db.sequelize.sync();
 // force: true will drop the table if it already exists
+
 const restart = false;
+
 if (restart) {
+  const status = db.status;
+  status.sync({ force: true }).then(() => {
+    status.create({ Name: "Accepted" });
+    status.create({ Name: "Pending" });
+    status.create({ Name: "Decline" });
+
+    console.log('Sync status');
+  })
+    .catch((err) => {
+      console.log("Failed to sync status: " + err.message);
+
+    });
+
   const typeTransport = db.typeTrasport;
   typeTransport.sync({ force: true }).then(() => {
     typeTransport.create({ Name: "Sedan" });
@@ -83,7 +98,7 @@ if (restart) {
   });
 
   const model = db.model;
-  
+
   model.sync().then(() => {
     model.create({ Name: "Tourismo", BrandId: 1 });
     model.create({ Name: "Vito", BrandId: 1 });
@@ -147,12 +162,22 @@ if (restart) {
   });
 
 }
-db.sequelize.sync().then(() => {
-  console.log('Sync Database');
-}).catch((err) => {
-  console.log("Failed to sync db: " + err.message);
-});
 
+const restartDB = false;
+if (restartDB) {
+  db.sequelize.sync({ force: true }).then(() => {
+    console.log('Sync Database');
+  }).catch((err) => {
+    console.log("Failed to sync db: " + err.message);
+  });
+
+} else {
+  db.sequelize.sync().then(() => {
+    console.log('Sync Database');
+  }).catch((err) => {
+    console.log("Failed to sync db: " + err.message);
+  });
+}
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to ibus application." });

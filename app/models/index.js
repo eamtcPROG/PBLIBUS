@@ -36,7 +36,7 @@ db.order = require("../models/order.model.js")(sequelize, Sequelize);
 db.customer = require("../models/customer.model.js")(sequelize, Sequelize);
 db.transporter = require("../models/transporter.model.js")(sequelize, Sequelize);
 db.offer = require("../models/offer.model.js")(sequelize, Sequelize);
-
+db.status = require("../models/status.model.js")(sequelize, Sequelize);
 
 db.typeUser.hasMany(db.user, { foreignKey: 'TypeUserId' });
 db.user.belongsTo(db.typeUser, { foreignKey: 'TypeUserId' });
@@ -64,5 +64,7 @@ db.order.hasMany(db.offer, { foreignKey: 'OrderId' });
 db.offer.belongsTo(db.order, { foreignKey: 'OrderId' });
 db.transporter.hasMany(db.offer, { foreignKey: 'TrasporterId' });
 db.offer.belongsTo(db.transporter, { foreignKey: 'TrasporterId' });
+db.status.hasMany(db.offer, { foreignKey: 'StatusId' });
+db.offer.belongsTo(db.status, { foreignKey: 'StatusId' });
 
 module.exports = db;

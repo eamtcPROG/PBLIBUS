@@ -13,6 +13,9 @@ module.exports = (sequelize, Sequelize) => {
       },
       TrasporterId: {
         type: Sequelize.INTEGER
+      },
+      StatusId: {
+        type: Sequelize.INTEGER
       }
     });
   

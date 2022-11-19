@@ -7,6 +7,7 @@ exports.CreateOffer = (req, res) => {
     Price: req.body.price,
     OrderId: req.body.orderid,
     TrasporterId: req.body.trasporterid,
+    StatusId: req.IdStatus
 
   })
     .then(obj => {

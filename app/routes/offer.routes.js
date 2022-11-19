@@ -1,5 +1,5 @@
 const controller = require("../controllers/offer.controller");
-
+const { statusMiddleware } = require("../middleware");
 module.exports = function(app) {
     app.use(function(req, res, next) {
         res.header(
@@ -9,7 +9,10 @@ module.exports = function(app) {
         next();
       });
   
-    app.post("/api/offer/add",     
+    app.post("/api/offer/add",
+    [
+      statusMiddleware.setStatusIdPending
+    ],     
       controller.CreateOffer
     );
     app.get("/api/offer/getall",     
