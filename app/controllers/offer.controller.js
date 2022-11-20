@@ -1,5 +1,5 @@
 const db = require("../models");
-
+const { Op } = require("sequelize");
 const Offer = db.offer;
 exports.CreateOffer = (req, res) => {
 
@@ -215,6 +215,83 @@ exports.UpdateOfferById = (req, res) => {
     });
 };
 
+exports.UpdateOfferByIdDecline = (req, res) => {
+
+  Offer.update({
+    StatusId: req.IdStatus
+  },
+    {
+      where: {
+        IdOffer: req.params.id
+      }
+    })
+    .then(obj => {
+      if (!obj) {
+        return res.status(404).send({ message: "Offer Not found." });
+      } else {
+        return res.status(200).send({ message: "Offer Status Updated." });
+      }
+
+
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
+
+exports.UpdateOfferByIdAccepted = (req, res) => {
+
+  Offer.update({
+    StatusId: req.IdStatus
+  },
+    {
+      where: {
+        IdOffer: req.params.id
+      }
+    })
+    .then(obj => {
+      
+      if (!obj) {
+        return res.status(404).send({ message: "Offer Not found." });
+      } else {
+        return res.status(200).send({ message: "Offer Status Updated." })
+      }
+
+
+    }).catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+exports.UpdateOfferByIdPending = (req, res) => {
+
+  Offer.update({
+    StatusId: req.IdStatusDecline
+  },
+    {
+      where:
+      
+      {
+        
+        [Op.and]: [
+          { OrderId: req.params.id },
+          { StatusId: req.IdStatus }
+        ]
+      }
+    })
+    .then(obj => {
+      
+      if (!obj) {
+        return res.status(404).send({ message: "Offer Not found." });
+      } else {
+        return res.status(200).send({ message: "Offer Status Updated." })
+      }
+
+
+    }).catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
 exports.FindAllOfferWithFK = (req, res) => {
 
   Offer.findAll({

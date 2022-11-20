@@ -30,6 +30,24 @@ module.exports = function(app) {
     app.put("/api/offer/update/:id",     
     controller.UpdateOfferById
     );
+    app.put("/api/offer/updatedicline/:id",  
+    [
+      statusMiddleware.setStatusIdDecline
+    ],    
+    controller.UpdateOfferByIdDecline
+    );
+    app.put("/api/offer/updateaccepted/:id",  
+    [
+      statusMiddleware.setStatusIdAccepted
+    ],    
+    controller.UpdateOfferByIdAccepted
+    );
+    app.put("/api/offer/updatepending/:id",  
+    [
+      statusMiddleware.setStatusIdPendingAndDecline
+    ],    
+    controller.UpdateOfferByIdAccepted
+    );
     app.get("/api/offer/get/getfk",     
     controller.FindAllOfferWithFK
     );

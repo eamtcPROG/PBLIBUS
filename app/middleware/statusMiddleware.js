@@ -13,6 +13,78 @@ setStatusIdPending = (req, res, next) => {
             if (e) {
                 req.IdStatus = e.IdStatus;
             }
+            next();
+        });
+        
+    }
+
+};
+
+
+setStatusIdPendingAndDecline = (req, res, next) => {
+
+    if (req != undefined) {
+
+        Status.findOne({
+            where: {
+                Name: 'Pending'
+            }
+        }).then(e => {
+            if (e) {
+                req.IdStatusDecline = e.IdStatus;
+            }
+
+        });
+        
+            Status.findOne({
+                where: {
+                    Name: 'Decline'
+                }
+            }).then(e => {
+                if (e) {
+                    req.IdStatus = e.IdStatus;
+                }
+    
+                next();
+            });
+    }
+
+};
+
+setStatusIdAccepted = (req, res, next) => {
+
+    if (req != undefined) {
+
+        Status.findOne({
+            where: {
+                Name: 'Accepted'
+            }
+        }).then(e => {
+            if (e) {
+                req.IdStatus = e.IdStatus;
+            }
+
+            next();    
+        });
+        
+    }
+
+};
+
+
+
+setStatusIdDecline = (req, res, next) => {
+
+    if (req != undefined) {
+
+        Status.findOne({
+            where: {
+                Name: 'Decline'
+            }
+        }).then(e => {
+            if (e) {
+                req.IdStatus = e.IdStatus;
+            }
 
             next();
         });
@@ -22,10 +94,11 @@ setStatusIdPending = (req, res, next) => {
 
 
 
-
-
 const statusMiddleware = {
-    setStatusIdPending
+    setStatusIdPending,
+    setStatusIdAccepted,
+    setStatusIdDecline,
+    setStatusIdPendingAndDecline
 };
 
 module.exports = statusMiddleware;
