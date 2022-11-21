@@ -105,7 +105,7 @@ exports.FindOffersForOrder = (req, res) => {
         model: db.user
       }
       ]
-      
+
     },
     {
       model: db.status
@@ -251,7 +251,7 @@ exports.UpdateOfferByIdAccepted = (req, res) => {
       }
     })
     .then(obj => {
-      
+
       if (!obj) {
         return res.status(404).send({ message: "Offer Not found." });
       } else {
@@ -270,9 +270,9 @@ exports.UpdateOfferByIdPending = (req, res) => {
   },
     {
       where:
-      
+
       {
-        
+
         [Op.and]: [
           { OrderId: req.params.id },
           { StatusId: req.IdStatus }
@@ -280,7 +280,7 @@ exports.UpdateOfferByIdPending = (req, res) => {
       }
     })
     .then(obj => {
-      
+
       if (!obj) {
         return res.status(404).send({ message: "Offer Not found." });
       } else {
@@ -292,6 +292,40 @@ exports.UpdateOfferByIdPending = (req, res) => {
       res.status(500).send({ message: err.message });
     });
 };
+
+exports.UpdateOfferToPending = (req, res) => {
+
+  Offer.update({
+    StatusId: req.IdStatusPending
+  },
+    {
+      where: {  
+        [Op.and]: [
+          
+          { StatusId: {[Op.or]: [req.IdStatusAccepted, req.IdStatus]} },          
+          { OrderId: req.params.id },
+        ]
+      
+      }
+    }
+  )
+    .then(obj => {
+
+      if (!obj) {
+        return res.status(404).send({ message: "Offer Not found." });
+      } else {
+        console.log(req.IdStatusPedding)
+        console.log(req.IdStatusAccepted)
+        console.log(req.IdStatus)
+        return res.status(200).send({ message: "Offer Status Updated." })
+      }
+
+
+    }).catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
 exports.FindAllOfferWithFK = (req, res) => {
 
   Offer.findAll({
