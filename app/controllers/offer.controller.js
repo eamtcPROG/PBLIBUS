@@ -189,6 +189,27 @@ exports.DeleteOfferById = (req, res) => {
     });
 };
 
+exports.DeleteOfferByOrderId = (req, res) => {
+
+  Offer.destroy({
+    where: {
+      OrderId: req.params.id
+    }
+  })
+    .then(obj => {
+      if (!obj) {
+        return res.status(404).send({ message: "Offer Not found." });
+      } else {
+        return res.status(200).send({ message: "Offer Deleted." });
+      }
+
+
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
 exports.UpdateOfferById = (req, res) => {
 
   Offer.update({

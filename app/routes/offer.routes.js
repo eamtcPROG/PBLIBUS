@@ -27,6 +27,9 @@ module.exports = function (app) {
   app.delete("/api/offer/delete/:id",
     controller.DeleteOfferById
   );
+  app.delete("/api/offer/deletefororder/:id",
+    controller.DeleteOfferByOrderId
+  );
   app.put("/api/offer/update/:id",
     controller.UpdateOfferById
   );
