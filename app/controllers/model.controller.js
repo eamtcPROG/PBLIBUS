@@ -1,3 +1,4 @@
+const { brand } = require("../models");
 const db = require("../models");
 
 const model = db.model;
@@ -23,7 +24,9 @@ exports.CreateModel = (req, res) => {
 
 exports.FindAllModels = (req, res) => {
 
-  model.findAll()
+  model.findAll(
+    {include:db.brand}
+  )
   .then(obj => {
     console.log(obj);
 
