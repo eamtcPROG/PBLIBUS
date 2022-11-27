@@ -1,5 +1,7 @@
 const db = require("../models");
 const Status = db.status;
+const Offer = db.offer;
+
 
 setStatusIdPending = (req, res, next) => {
 
@@ -131,6 +133,27 @@ setStatusIdDecline = (req, res, next) => {
 
 };
 
+checkOfferExists = (req, res, next) => {
+    // Name
+    if (req != undefined) {
+      // Email
+      Offer.findOne({
+        where: {
+            OrderId: req.params.id
+        }
+      }).then(user => {
+        if (!user) {
+          return res.status(201).send({
+            message: "No!,offer"
+          });
+          
+        }
+  
+        next();
+      });
+    }
+  
+  };
 
 
 const statusMiddleware = {
@@ -138,7 +161,8 @@ const statusMiddleware = {
     setStatusIdAccepted,
     setStatusIdDecline,
     setStatusIdPendingAndDecline,
-    setStatusIdDeclineToPending
+    setStatusIdDeclineToPending,
+    checkOfferExists
 };
 
 module.exports = statusMiddleware;

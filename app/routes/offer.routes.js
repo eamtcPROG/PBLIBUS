@@ -28,6 +28,9 @@ module.exports = function (app) {
     controller.DeleteOfferById
   );
   app.delete("/api/offer/deletefororder/:id",
+  [
+    statusMiddleware.checkOfferExists
+  ],
     controller.DeleteOfferByOrderId
   );
   app.put("/api/offer/update/:id",
