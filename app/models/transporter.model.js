@@ -10,6 +10,10 @@ module.exports = (sequelize, Sequelize) => {
       },
       UserId: {
         type: Sequelize.INTEGER
+      },
+      Rating: {
+        type: Sequelize.DOUBLE,
+        defaultValue:5.0
       }
     }, {timestamps: false});
   

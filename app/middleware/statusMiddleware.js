@@ -113,6 +113,45 @@ setStatusIdAccepted = (req, res, next) => {
 };
 
 
+setStatusIdDone = (req, res, next) => {
+
+    if (req != undefined) {
+
+        Status.findOne({
+            where: {
+                Name: 'Done'
+            }
+        }).then(e => {
+            if (e) {
+                req.IdStatus = e.IdStatus;
+            }
+
+            next();
+        });
+
+    }
+
+};
+
+setStatusIdRated = (req, res, next) => {
+
+    if (req != undefined) {
+
+        Status.findOne({
+            where: {
+                Name: 'Rated'
+            }
+        }).then(e => {
+            if (e) {
+                req.IdStatus = e.IdStatus;
+            }
+
+            next();
+        });
+
+    }
+
+};
 
 setStatusIdDecline = (req, res, next) => {
 
@@ -162,7 +201,9 @@ const statusMiddleware = {
     setStatusIdDecline,
     setStatusIdPendingAndDecline,
     setStatusIdDeclineToPending,
-    checkOfferExists
+    checkOfferExists,
+    setStatusIdDone,
+    setStatusIdRated
 };
 
 module.exports = statusMiddleware;

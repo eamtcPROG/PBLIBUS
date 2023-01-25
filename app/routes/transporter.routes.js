@@ -1,5 +1,5 @@
 const controller = require("../controllers/transporter.controller");
-
+const { transporterMiddleware } = require("../middleware");
 module.exports = function(app) {
     app.use(function(req, res, next) {
         res.header(
@@ -29,5 +29,12 @@ module.exports = function(app) {
     );
     app.put("/api/transporter/update/:id",     
     controller.UpdateTransporterById
+    );
+    
+    app.put("/api/transporter/updaterating/:id",
+    [
+      transporterMiddleware.getTransporterPreviousRating
+    ],     
+    controller.UpdateTransporterByIdRating
     );
   };

@@ -38,7 +38,7 @@ exports.FindAllTransporter = (req, res) => {
 };
 
 exports.FindAllTransporterWithFK = (req, res) => {
- 
+
   db.transport.findAll({
     include: { all: true },
     where: {
@@ -49,7 +49,7 @@ exports.FindAllTransporterWithFK = (req, res) => {
       console.log(obj);
 
       if (obj) {
- 
+
         res.json(obj);
       }
 
@@ -60,19 +60,19 @@ exports.FindAllTransporterWithFK = (req, res) => {
 
 };
 exports.FindAllTransporterWithTransport = (req, res) => {
- 
+
   Transporter.findAll({
-    include: { 
-      model:db.transport,
-      include:[{
-        model:db.model,
-        include:{
-          model:db.brand
+    include: {
+      model: db.transport,
+      include: [{
+        model: db.model,
+        include: {
+          model: db.brand
         }
       },
-    {model:db.typeTrasport}
-    ]
-     },
+      { model: db.typeTrasport }
+      ]
+    },
     where: {
       UserId: req.params.id
     }
@@ -81,7 +81,7 @@ exports.FindAllTransporterWithTransport = (req, res) => {
       console.log(obj);
 
       if (obj) {
- 
+
         res.json(obj);
       }
 
@@ -141,6 +141,30 @@ exports.UpdateTransporterById = (req, res) => {
   Transporter.update({
     TransportId: req.body.transportid,
     UserId: req.body.userid,
+  },
+    {
+      where: {
+        IdTransporter: req.params.id
+      }
+    })
+    .then(obj => {
+      if (!obj) {
+        return res.status(404).send({ message: "Transporter Not found." });
+      } else {
+        return res.status(200).send({ message: "Transporter Updated." });
+      }
+
+
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
+exports.UpdateTransporterByIdRating = (req, res) => {
+  var newRating = (req.previousRating + req.body.rating) / 2;
+  Transporter.update({
+    Rating: newRating
   },
     {
       where: {

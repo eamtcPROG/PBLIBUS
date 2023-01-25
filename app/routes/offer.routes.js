@@ -28,9 +28,9 @@ module.exports = function (app) {
     controller.DeleteOfferById
   );
   app.delete("/api/offer/deletefororder/:id",
-  [
-    statusMiddleware.checkOfferExists
-  ],
+    [
+      statusMiddleware.checkOfferExists
+    ],
     controller.DeleteOfferByOrderId
   );
   app.put("/api/offer/update/:id",
@@ -67,4 +67,17 @@ module.exports = function (app) {
   app.get("/api/offer/getfororder/:id",
     controller.FindOffersForOrder
   );
+  app.put("/api/offer/updatedone/:id",
+    [
+      statusMiddleware.setStatusIdDone
+    ],
+    controller.UpdateOfferByIdAccepted
+  );
+  app.put("/api/offer/updaterated/:id",
+    [
+      statusMiddleware.setStatusIdRated
+    ],
+    controller.UpdateOfferByIdAccepted
+  );
+
 };

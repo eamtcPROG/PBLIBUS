@@ -31,7 +31,8 @@ if (restart) {
     status.create({ Name: "Accepted" });
     status.create({ Name: "Pending" });
     status.create({ Name: "Decline" });
-
+    status.create({ Name: "Done" });
+    status.create({ Name: "Rated" });
     console.log('Sync status');
   })
     .catch((err) => {
