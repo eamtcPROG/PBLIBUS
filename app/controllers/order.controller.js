@@ -57,9 +57,9 @@ exports.CreateOrder = (req, res) => {
       model:db.offer
     }
   ],
-where:{
-  '$Offers$': null
-}
+// where:{
+//   '$Offers$': null
+// }
 })
     .then(obj => {
       console.log(obj);
